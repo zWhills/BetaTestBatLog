@@ -1,4 +1,3 @@
-// this is updated
 const logOutput = document.getElementById('logOutput');
 const startBtn = document.getElementById('startBtn');
 const pauseBtn = document.getElementById('pauseBtn');
@@ -52,18 +51,21 @@ function logElapsedTime() {
 
   const now = new Date();
   const elapsedMs = now - startTime - totalPauseDuration;
-  const elapsedMinutes = Math.floor(elapsedMs / 60000);
+  const elapsedSeconds = Math.floor(elapsedMs / 1000);
 
   // Log all missed minutes since last log
-  while (lastLoggedMinute < elapsedMinutes) {
+  const elapsedMinutes = Math.floor(elapsedSeconds / 60);
+  if (lastLoggedMinute < elapsedMinutes) {
     const fakeElapsed = (lastLoggedMinute + 1) * 60000;
     appendLog(`Elapsed: ${formatElapsed(fakeElapsed)} (logged at ${now.toLocaleTimeString()})`);
     lastLoggedMinute++;
   }
 
+  // Update the status with the exact elapsed time in HH:MM:SS format
   status.textContent = `Logging... Elapsed: ${formatElapsed(elapsedMs)}`;
 }
 
+// === Updated part: change interval to 1 second ===
 startBtn.onclick = () => {
   if (logging) return;
   logging = true;
@@ -75,7 +77,7 @@ startBtn.onclick = () => {
 
   appendLog(`=== Session started at ${startTime.toLocaleString()} ===`);
   logElapsedTime();
-  intervalId = setInterval(logElapsedTime, 60000);
+  intervalId = setInterval(logElapsedTime, 1000);  // Update every second
 
   startBtn.disabled = true;
   pauseBtn.disabled = false;
