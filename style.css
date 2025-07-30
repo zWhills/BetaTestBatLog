@@ -1,11 +1,11 @@
 body {
   font-family: Arial, sans-serif;
-  background: #f0f0f0;
+  background: #fff; /* Default is white */
   margin: 0;
   padding: 20px;
   color: #333;
   min-height: 100vh;
-  transition: background 0.6s cubic-bezier(0.4,0,0.2,1);
+  transition: background 1s cubic-bezier(0.4,0,0.2,1);
 }
 
 .container {
