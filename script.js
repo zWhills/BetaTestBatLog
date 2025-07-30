@@ -140,7 +140,6 @@ clearBtn.onclick = () => {
 };
 
 function setPausedBackground(paused) {
-  // Use a smooth 1s transition for background changes
   document.body.style.transition = "background 1s cubic-bezier(0.4,0,0.2,1)";
   document.body.style.background = paused
     ? "linear-gradient(135deg, #ff3a3a 0%, #3a7bff 100%)"
