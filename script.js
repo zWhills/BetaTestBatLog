@@ -146,20 +146,6 @@ function setPausedBackground(paused) {
     : "#fff";
 }
 
-// Also update background on auto-pause (screen off/app hidden)
-document.addEventListener('visibilitychange', () => {
-  if (document.hidden && logging && !paused) {
-    paused = true;
-    pauseStart = new Date();
-    appendLog(`=== Auto-paused (Screen is Turned Off) at ${pauseStart.toLocaleTimeString()} ===`);
-    pauseBtn.disabled = true;
-    resumeBtn.disabled = false;
-    status.textContent = 'Logging paused (screen off or app hidden).';
-    setPausedBackground(true);
-    saveState && saveState();
-  }
-});
-
 // Restore background on reload
 window.onload = () => {
   loadLog();
