@@ -53,12 +53,11 @@ function logElapsedTime() {
   const elapsedMs = now - startTime - totalPauseDuration;
   const elapsedSeconds = Math.floor(elapsedMs / 1000);
 
-  // Log all missed minutes since last log
+  // Log the current elapsed time at the current timestamp
   const elapsedMinutes = Math.floor(elapsedSeconds / 60);
-  if (lastLoggedMinute < elapsedMinutes) {
-    const fakeElapsed = (lastLoggedMinute + 1) * 60000;
-    appendLog(`Elapsed: ${formatElapsed(fakeElapsed)} (logged at ${now.toLocaleTimeString()})`);
-    lastLoggedMinute++;
+  if (elapsedMinutes > lastLoggedMinute) {
+    appendLog(`Elapsed: ${formatElapsed(elapsedMs)} (logged at ${now.toLocaleTimeString()})`);
+    lastLoggedMinute = elapsedMinutes;
   }
 
   // Update the status with the exact elapsed time in HH:MM:SS format
